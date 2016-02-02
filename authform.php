@@ -25,10 +25,10 @@ class AuthForm extends FormAbstract
             $userid = $config->getUsername();
             $pass = $config->getPassword();
         }
-        $this->baseUrl = 'http://sso.bhmobile.ba';
+        $this->baseUrl = 'http://sso.bhmobile.bhtelecom.ba/'; // izmjena nakon što je BH Telecom izmijenio stranicu
         $this->actionUrl = '/sso/login';
         $this->fields = array(new Field('application', ''),
-                              new Field('url', 'http://www.bhmobile.ba/'),
+                              new Field('url', 'http://www.bhmobile.bhtelecom.ba/'),
                               new Field('realm', 'sso'),
                               new Field('userid', $userid),
                               new Field('password', $pass));
