@@ -20,11 +20,18 @@ class MessageForm extends FormAbstract
         if(!$this->config->isSidSet()) {
             throw new Exception('API not configured, please run install.php first.');
         }
+        /* od ranije stranice
         $this->baseUrl = 'http://www.bhmobile.ba';
         $this->actionUrl = '/portal/show?idc=1023422&subtype=web2sms_arhiva';
         $this->fields = array(new Field('primatelj', $sendTo),
                               new Field('tekst_poruke', $message),
-                              new Field('action', 'send_sms_submit'));
+                              new Field('action', 'send_sms_submit'));*/
+        $this->baseUrl = 'http://www.bhmobile.bhtelecom.ba';
+        $this->actionUrl = '/posalji-poruku?views=kreirajPoruku';
+        // Treba vidjeti koja su ključna polja ... 
+                              
+                              
+                              
     }
 
     protected function configCurl()
