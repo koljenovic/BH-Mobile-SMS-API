@@ -20,11 +20,9 @@ class MessageForm extends FormAbstract
         if(!$this->config->isSidSet()) {
             throw new Exception('API not configured, please run install.php first.');
         }
-        $this->baseUrl = 'http://www.bhmobile.ba';
-        $this->actionUrl = '/portal/show?idc=1023422&subtype=web2sms_arhiva';
-        $this->fields = array(new Field('primatelj', $sendTo),
-                              new Field('tekst_poruke', $message),
-                              new Field('action', 'send_sms_submit'));
+        $this->baseUrl = 'https://bhmobile.bhtelecom.ba';
+        $this->actionUrl = '/kams-mobileAppService/stanje-racuna/poruka/posalji?primalac=' . urlencode($sendTo) . '&test=' . urlencode($message);
+        $this->fields = array();
     }
 
     protected function configCurl()
@@ -33,9 +31,13 @@ class MessageForm extends FormAbstract
                         CURLOPT_USERAGENT => '',
                         CURLOPT_NOBODY => TRUE,
                         CURLOPT_RETURNTRANSFER => TRUE,
-                        CURLOPT_COOKIE => 'ticket=' . $this->config->getSid(),
-                        CURLOPT_POST => TRUE,
-                        CURLOPT_POSTFIELDS => $this->getPostfields());
+                        CURLOPT_HEADER => TRUE);
+        $headers = array(
+            'Authorization: Bearer ' . $this->config->getSid()
+        );
+
+
+        curl_setopt($this->curlHandle, CURLOPT_HTTPHEADER, $headers);
         curl_setopt_array($this->curlHandle, $config);
     }
 
