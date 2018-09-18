@@ -11,7 +11,7 @@ if($config->isSidSet()) {
     echo '<p><strong>Korak 1</strong>: postavite vrijednost username i password varijabli u config.php <br /></p>';
 } else {
     $request = new AuthForm;
-    $sid = $request->dispatch()->getCookieJar()->getCookie('ticket');
+    $sid = $request->dispatch();
     if(!$sid) {
         echo '<p>Unesite ispravne korisnicke podatke, mozete ih dobiti putem SMS-a preko http://bhmobile.ba/ <br /></p>';
     } else {
